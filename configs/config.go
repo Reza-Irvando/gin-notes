@@ -2,13 +2,13 @@ package configs
 
 import (
 	"github.com/jinzhu/gorm"
-	"gorm.io/driver/mysql"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 var DB *gorm.DB
 
 func InitDB() (*gorm.DB, error) {
-	db, err := gorm.Open(mysql.Open("root:@tcp(localhost:3306)/go-notes"))
+	db, err := gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/go-notes?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		return nil, err
 	}
