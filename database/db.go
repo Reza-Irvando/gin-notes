@@ -2,7 +2,7 @@ package database
 
 import (
 	"gin-notes/models"
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
 )
 
 func Migrate(db *gorm.DB) {

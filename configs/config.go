@@ -1,7 +1,7 @@
 package configs
 
 import (
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
 	"gorm.io/driver/mysql"
 )
 

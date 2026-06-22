@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"gin-notes/database"
 	"gin-notes/configs"
+	"gin-notes/handlers"
 
 )
 
@@ -23,6 +24,9 @@ func main(){
 			"message": "pong",
 		})
 	})
-	
+
+	r.POST("/login", handlers.Login(db))
+	r.POST("/register", handlers.Register(db))
+
 	r.Run()
 }
