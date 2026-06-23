@@ -4,6 +4,7 @@ import (
 	"gin-notes/models"
 	"gin-notes/utils"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -14,9 +15,10 @@ const DefaultPageSize int = 5
 
 // Struct untuk request membuat catatan
 type CreateNoteRequest struct {
-	Title   string `json:"title" binding:"required"`
-	Content string `json:"content" binding:"required"`
-	Status  string `json:"status"`
+	Title      string `json:"title" binding:"required"`
+	Content    string `json:"content" binding:"required"`
+	Status     string `json:"status"`
+	CategoryID *uint  `json:"category_id"`
 }
 
 // Membuat catatan baru
@@ -51,16 +53,20 @@ func CreateNote(db *gorm.DB) gin.HandlerFunc {
 		}
 
 		note := models.Note{
-			UserID:  userID.(uint),
-			Title:   input.Title,
-			Content: input.Content,
-			Status:  input.Status,
+			UserID:     userID.(uint),
+			Title:      input.Title,
+			Content:    input.Content,
+			Status:     input.Status,
+			CategoryID: input.CategoryID,
 		}
 
 		if err := db.Create(&note).Error; err != nil {
 			utils.ErrorResponse(c, 500, "Failed to create note")
 			return
 		}
+
+		// Log activity
+		utils.LogActivity(db, userID.(uint), "CREATE", "Note", note.ID, input)
 
 		utils.SuccessResponse(c, 201, "Note created successfully", note)
 	}
@@ -90,7 +96,7 @@ func UpdateNote(db *gorm.DB) gin.HandlerFunc {
 		}
 
 		var note models.Note
-		if err := db.Where("id = ? AND user_id = ?", uint(id), userID.(uint)).First(&note).Error; err != nil {
+		if err := db.Where("id = ? AND user_id = ? AND deleted_at IS NULL", uint(id), userID.(uint)).First(&note).Error; err != nil {
 			utils.ErrorResponse(c, 404, "Note not found")
 			return
 		}
@@ -117,6 +123,9 @@ func UpdateNote(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
+		// Log activity
+		utils.LogActivity(db, userID.(uint), "UPDATE", "Note", note.ID, input)
+
 		utils.SuccessResponse(c, 200, "Note updated successfully", note)
 	}
 }
@@ -138,15 +147,19 @@ func DeleteNote(db *gorm.DB) gin.HandlerFunc {
 		}
 
 		var note models.Note
-		if err := db.Where("id = ? AND user_id = ?", uint(id), userID.(uint)).First(&note).Error; err != nil {
+		if err := db.Where("id = ? AND user_id = ? AND deleted_at IS NULL", uint(id), userID.(uint)).First(&note).Error; err != nil {
 			utils.ErrorResponse(c, 404, "Note not found")
 			return
 		}
 
-		if err := db.Delete(&note).Error; err != nil {
+		// Soft delete dengan set deleted_at
+		if err := db.Model(&note).Update("deleted_at", time.Now()).Error; err != nil {
 			utils.ErrorResponse(c, 500, "Failed to delete note")
 			return
 		}
+
+		// Log activity
+		utils.LogActivity(db, userID.(uint), "DELETE", "Note", note.ID, gin.H{})
 
 		utils.SuccessResponse(c, 200, "Note deleted successfully", nil)
 	}
@@ -169,7 +182,7 @@ func GetNoteDetail(db *gorm.DB) gin.HandlerFunc {
 		}
 
 		var note models.Note
-		if err := db.Where("id = ? AND user_id = ?", uint(id), userID.(uint)).First(&note).Error; err != nil {
+		if err := db.Where("id = ? AND user_id = ? AND deleted_at IS NULL", uint(id), userID.(uint)).First(&note).Error; err != nil {
 			utils.ErrorResponse(c, 404, "Note not found")
 			return
 		}
@@ -207,8 +220,8 @@ func GetAllNotes(db *gorm.DB) gin.HandlerFunc {
 	search := c.Query("search")
 	status := c.Query("status")
 
-	// Build query
-	query := db.Where("user_id = ?", userID.(uint))
+	// Build query dengan soft delete filter
+	query := db.Where("user_id = ? AND deleted_at IS NULL", userID.(uint))
 
 	// Tambahkan filter pencarian
 	if search != "" {
