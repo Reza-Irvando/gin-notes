@@ -49,6 +49,11 @@ func AddToFavorite(db *gorm.DB) gin.HandlerFunc {
 			utils.ErrorResponse(c, 500, "Failed to add to favorite")
 			return
 		}
+
+		// Log activity
+		utils.LogActivity(db, userID.(uint), "ADD_FAVORITE", "Note", uint(id), gin.H{})
+
+		utils.SuccessResponse(c, 200, "Note added to favorites successfully", nil)
 	}
 }
 
@@ -80,6 +85,11 @@ func RemoveFromFavorite(db *gorm.DB) gin.HandlerFunc {
 			utils.ErrorResponse(c, 500, "Failed to remove from favorite")
 			return
 		}
+		
+		// Log activity
+		utils.LogActivity(db, userID.(uint), "REMOVE_FAVORITE", "Note", uint(id), gin.H{})
+
+		utils.SuccessResponse(c, 200, "Note removed from favorites successfully", nil)
 	}
 }
 
