@@ -46,6 +46,11 @@ func CreateCategory(db *gorm.DB) gin.HandlerFunc {
 			utils.ErrorResponse(c, 500, "Failed to create category")
 			return
 		}
+
+		// Log activity
+		utils.LogActivity(db, userID.(uint), "CREATE", "Category", category.ID, input)
+
+		utils.SuccessResponse(c, 201, "Category created successfully", category)
 	}
 }
 
@@ -116,6 +121,11 @@ func UpdateCategory(db *gorm.DB) gin.HandlerFunc {
 			utils.ErrorResponse(c, 500, "Failed to update category")
 			return
 		}
+
+		// Log activity
+		utils.LogActivity(db, userID.(uint), "UPDATE", "Category", category.ID, input)
+
+		utils.SuccessResponse(c, 200, "Category updated successfully", category)
 	}
 }
 
@@ -147,5 +157,10 @@ func DeleteCategory(db *gorm.DB) gin.HandlerFunc {
 			utils.ErrorResponse(c, 500, "Failed to delete category")
 			return
 		}
+
+		// Log activity
+		utils.LogActivity(db, userID.(uint), "DELETE", "Category", category.ID, gin.H{})
+
+		utils.SuccessResponse(c, 200, "Category deleted successfully", nil)
 	}
 }
