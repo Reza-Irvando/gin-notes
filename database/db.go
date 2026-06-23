@@ -5,6 +5,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// Fungsi untuk melakukan migrasi database
 func Migrate(db *gorm.DB) {
 	db.AutoMigrate(
 		&models.User{},
