@@ -17,6 +17,9 @@ func main(){
 	}
 
 	database.Migrate(db)
+
+	// Seeder database
+	database.Seed(db)
 	
 	// Public routes
 	r.GET("/ping", func(c *gin.Context) {
@@ -39,6 +42,50 @@ func main(){
 		notes.GET("/:id", handlers.GetNoteDetail(db))
 		notes.PUT("/update/:id", handlers.UpdateNote(db))
 		notes.DELETE("/:id", handlers.DeleteNote(db))
+
+		// Favorite routes
+		notes.POST("/:id/favorite", handlers.AddToFavorite(db))
+		notes.DELETE("/:id/favorite", handlers.RemoveFromFavorite(db))
+		notes.GET("/favorite/check/:id", handlers.IsFavorite(db))
+	}
+
+	// Protected routes - Categories
+	categories := r.Group("/categories")
+	categories.Use(middlewares.AuthMiddleware())
+	{
+		categories.POST("", handlers.CreateCategory(db))
+		categories.GET("", handlers.GetAllCategories(db))
+		categories.PUT("/:id", handlers.UpdateCategory(db))
+		categories.DELETE("/:id", handlers.DeleteCategory(db))
+	}
+
+	// Protected routes - Tags
+	tags := r.Group("/tags")
+	tags.Use(middlewares.AuthMiddleware())
+	{
+		tags.POST("", handlers.CreateTag(db))
+		tags.GET("", handlers.GetAllTags(db))
+		tags.PUT("/:id", handlers.UpdateTag(db))
+		tags.DELETE("/:id", handlers.DeleteTag(db))
+
+		// Note-Tag relationship
+		tags.POST("/add/:noteId/:tagId", handlers.AddTagToNote(db))
+		tags.DELETE("/remove/:noteId/:tagId", handlers.RemoveTagFromNote(db))
+	}
+
+	// Protected routes - Favorites
+	favorites := r.Group("/favorites")
+	favorites.Use(middlewares.AuthMiddleware())
+	{
+		favorites.GET("", handlers.GetFavoriteNotes(db))
+	}
+
+	// Protected routes - Activity Log
+	activities := r.Group("/activities")
+	activities.Use(middlewares.AuthMiddleware())
+	{
+		activities.GET("", handlers.GetActivityLog(db))
+		activities.GET("/:entity/:entityId", handlers.GetEntityActivityLog(db))
 	}
 
 	r.Run()
