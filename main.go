@@ -1,12 +1,12 @@
 package main
 
 import (
-	"net/http"
-	"github.com/gin-gonic/gin"
-	"gin-notes/database"
 	"gin-notes/configs"
+	"gin-notes/database"
 	"gin-notes/handlers"
+	"gin-notes/middlewares"
 
+	"github.com/gin-gonic/gin"
 )
 
 func main(){
@@ -18,15 +18,28 @@ func main(){
 
 	database.Migrate(db)
 	
+	// Public routes
 	r.GET("/ping", func(c *gin.Context) {
-		// Return JSON response
-		c.JSON(http.StatusOK, gin.H{
+		c.JSON(200, gin.H{
 			"message": "pong",
 		})
 	})
 
-	r.POST("/login", handlers.Login(db))
+	// Authentication routes
 	r.POST("/register", handlers.Register(db))
+	r.POST("/login", handlers.Login(db))
+	r.POST("/logout", middlewares.AuthMiddleware(), handlers.Logout)
+
+	// Protected routes - Notes
+	notes := r.Group("/notes")
+	notes.Use(middlewares.AuthMiddleware())
+	{
+		notes.POST("add", handlers.CreateNote(db))
+		notes.GET("", handlers.GetAllNotes(db))
+		notes.GET("/:id", handlers.GetNoteDetail(db))
+		notes.PUT("/update/:id", handlers.UpdateNote(db))
+		notes.DELETE("/:id", handlers.DeleteNote(db))
+	}
 
 	r.Run()
 }
