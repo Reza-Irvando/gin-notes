@@ -14,7 +14,7 @@ func Logout(c *gin.Context) {
 	// Mengambil user_id dari context yang di-set oleh AuthMiddleware
 	userID, exists := c.Get("user_id")
 	if !exists {
-		utils.ErrorResponse(c, 401, "User tidak terautentikasi")
+		utils.ErrorResponse(c, 401, "Unauthorized")
 		return
 	}
 
