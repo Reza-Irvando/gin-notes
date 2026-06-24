@@ -1,216 +1,1864 @@
 {
   "info": {
-    "_postman_id": "gin-notes-collection",
-    "name": "Notes Management System",
-    "description": "API collection for Notes Management System built with Gin",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "_postman_id": "282b8046-983e-46ca-8862-e98f3d5c1afb",
+    "name": "gin-notes-api-test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56061881",
+    "_collection_link": "https://go.postman.co/collection/56061881-282b8046-983e-46ca-8862-e98f3d5c1afb?source=collection_link"
   },
   "item": [
     {
-      "name": "Authentication",
+      "name": "user",
       "item": [
         {
-          "name": "Register",
+          "name": "register",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
+            "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+              "raw": "{\r\n    \"email\" : \"user1\",\r\n    \"password\" : \"password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
             "url": {
               "raw": "http://localhost:8080/register",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "8080",
-              "path": ["register"]
+              "path": [
+                "register"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": null,
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "register-success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" : \"user1@mail.com\",\r\n    \"password\" : \"password123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "register"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 10:25:52 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "238"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"User registered successfully\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMTM5NTIsInVzZXJfaWQiOjJ9.KyTst4Y9l1N-HWUNwkVVjx9HGL3Y1zpdiNbfXtX9DXU\",\n        \"user\": {\n            \"email\": \"user@mail.com\",\n            \"id\": 2\n        }\n    }\n}"
+            },
+            {
+              "name": "register-invalid email",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" : \"user1\",\r\n    \"password\" : \"password\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "register"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 10:27:30 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "50"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": false,\n    \"message\": \"Invalid email format\"\n}"
+            }
+          ]
         },
         {
-          "name": "Login",
+          "name": "login",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
+            "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+              "raw": "{\r\n    \"email\" : \"user1@example.com\",\r\n    \"password\" : \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
             "url": {
               "raw": "http://localhost:8080/login",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "8080",
-              "path": ["login"]
+              "path": [
+                "login"
+              ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "login-success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" : \"user1@mail.com\",\r\n    \"password\" : \"password123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 10:29:01 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "226"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMTQxNDEsInVzZXJfaWQiOjJ9.67pzoCTlKJ9ocS27UflsONMmlsiP99loRodzULTwPfs\",\n        \"user\": {\n            \"email\": \"user@mail.com\",\n            \"id\": 2\n        }\n    }\n}"
+            },
+            {
+              "name": "login-fail",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" : \"user@mail.com\",\r\n    \"password\" : \"password1\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 10:33:17 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "49"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": false,\n    \"message\": \"Invalid credentials\"\n}"
+            }
+          ]
         },
         {
-          "name": "Logout",
+          "name": "logout",
           "request": {
+            "auth": {
+              "type": "noauth"
+            },
             "method": "POST",
             "header": [],
             "url": {
               "raw": "http://localhost:8080/logout",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "8080",
-              "path": ["logout"]
+              "path": [
+                "logout"
+              ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "logout",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/logout",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "logout"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 16:49:32 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "65"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Logout berhasil\",\n    \"data\": {\n        \"user_id\": 1\n    }\n}"
+            }
+          ]
         }
       ]
     },
     {
-      "name": "Notes",
+      "name": "categories",
       "item": [
         {
-          "name": "Create Note",
+          "name": "categories-all",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzI2MzIsInVzZXJfaWQiOjF9.xm_WCx2QIO5JAuFS1DiZnee2e2dMI9TM8GQj4MwZQbM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"My First Note\",\n  \"content\": \"This is the content of my note\",\n  \"status\": \"Active\"\n}"
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/categories",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "categories"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "categories-all",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/categories",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "categories"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 15:51:41 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "693"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Categories retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": 4,\n            \"user_id\": 1,\n            \"name\": \"Ideas\",\n            \"color\": \"#F39C12\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 3,\n            \"user_id\": 1,\n            \"name\": \"Important\",\n            \"color\": \"#E74C3C\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 2,\n            \"user_id\": 1,\n            \"name\": \"Personal\",\n            \"color\": \"#3498DB\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"name\": \"Work\",\n            \"color\": \"#FF5733\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "categories-create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzI2MzIsInVzZXJfaWQiOjF9.xm_WCx2QIO5JAuFS1DiZnee2e2dMI9TM8GQj4MwZQbM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Exercise\",\r\n  \"color\": \"#FF5733\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/categories",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "categories"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "categories-create",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Exercise\",\r\n  \"color\": \"#FF5733\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/categories",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "categories"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 15:53:28 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "239"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Category created successfully\",\n    \"data\": {\n        \"id\": 17,\n        \"user_id\": 1,\n        \"name\": \"Exercise\",\n        \"color\": \"#FF5733\",\n        \"created_at\": \"2026-06-23T22:53:28.6734405+07:00\",\n        \"updated_at\": \"2026-06-23T22:53:28.6734405+07:00\",\n        \"deleted_at\": null\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "categories-update",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzM3MjMsInVzZXJfaWQiOjF9.aSCSfvIUioWOOUWaFkyIpnrdiZ25SuovyaBt3lsr4vo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Hang out\",\r\n  \"color\": \"#FF5733\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/categories/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "categories",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "categories-update",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Hang out\",\r\n  \"color\": \"#FF5733\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/categories/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "categories",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 16:04:09 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "230"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Category updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"name\": \"Hang out\",\n        \"color\": \"#FF5733\",\n        \"created_at\": \"2026-06-23T20:42:11+07:00\",\n        \"updated_at\": \"2026-06-23T23:04:09.8912411+07:00\",\n        \"deleted_at\": null\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "categories-delete",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzQ2ODMsInVzZXJfaWQiOjF9.ykTdQcri88RdoHalHpiDaWEmgYoXZW8ciCdy-0zPQqk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/categories/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "categories",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "categories-delete",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/categories/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "categories",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 16:11:39 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "58"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Category deleted successfully\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "notes",
+      "item": [
+        {
+          "name": "notes-all",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzI2MzIsInVzZXJfaWQiOjF9.xm_WCx2QIO5JAuFS1DiZnee2e2dMI9TM8GQj4MwZQbM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/notes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "notes"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "notes-all",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/notes",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "notes"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 14:30:49 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1695"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Notes retrieved successfully\",\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"category_id\": 1,\n                \"title\": \"Rapat Pagi Tim\",\n                \"content\": \"Membahas progress sprint mingguan. Tim backend selesaikan API authentication. Frontend siap integrate dengan endpoint baru.\",\n                \"status\": \"Active\",\n                \"created_at\": \"2026-06-23T20:42:11+07:00\",\n                \"updated_at\": \"2026-06-23T20:49:05+07:00\",\n                \"deleted_at\": null\n            },\n            {\n                \"id\": 2,\n                \"user_id\": 1,\n                \"category_id\": 2,\n                \"title\": \"Review Code\",\n                \"content\": \"Review pull request dari 3 developer. Menemukan issue pada error handling. Suggest refactor code untuk readability lebih baik.\",\n                \"status\": \"Active\",\n                \"created_at\": \"2026-06-23T19:42:11+07:00\",\n                \"updated_at\": \"2026-06-23T20:49:05+07:00\",\n                \"deleted_at\": null\n            },\n            {\n                \"id\": 3,\n                \"user_id\": 1,\n                \"category_id\": 3,\n                \"title\": \"Update Database\",\n                \"content\": \"Update schema database untuk support fitur baru. Tambah tabel relation, optimize index untuk query performa.\",\n                \"status\": \"Active\",\n                \"created_at\": \"2026-06-23T18:42:11+07:00\",\n                \"updated_at\": \"2026-06-23T20:49:05+07:00\",\n                \"deleted_at\": null\n            },\n            {\n                \"id\": 4,\n                \"user_id\": 1,\n                \"category_id\": 4,\n                \"title\": \"Fixing Bug Login\",\n                \"content\": \"Temukan bug di login handler. User tidak bisa login dengan password benar. Fixed issue pada password verification logic.\",\n                \"status\": \"Active\",\n                \"created_at\": \"2026-06-23T17:42:11+07:00\",\n                \"updated_at\": \"2026-06-23T20:49:05+07:00\",\n                \"deleted_at\": null\n            },\n            {\n                \"id\": 5,\n                \"user_id\": 1,\n                \"category_id\": 1,\n                \"title\": \"Dokumentasi API\",\n                \"content\": \"Tulis dokumentasi lengkap untuk API endpoints. Include request/response examples, error codes, dan authentication requirements.\",\n                \"status\": \"Active\",\n                \"created_at\": \"2026-06-23T16:42:11+07:00\",\n                \"updated_at\": \"2026-06-23T20:49:05+07:00\",\n                \"deleted_at\": null\n            }\n        ],\n        \"page\": 1,\n        \"page_size\": 5,\n        \"total\": 10,\n        \"total_pages\": 2\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "notes-create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIzNTczNzIsInVzZXJfaWQiOjF9.qbYiPSZxn49alamzjUJva1fW4og9xnfmY2C7iok2Hno",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"note baru 2\",\r\n    \"content\": \"content baru 2\",\r\n    \"status\": \"Active\",\r\n    \"category_id\": 3\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
             "url": {
               "raw": "http://localhost:8080/notes",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "8080",
-              "path": ["notes"]
-            }
-          }
-        },
-        {
-          "name": "Get All Notes",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/notes?page=1&page_size=10&search=&status=",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["notes"],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "page_size",
-                  "value": "10"
-                },
-                {
-                  "key": "search",
-                  "value": ""
-                },
-                {
-                  "key": "status",
-                  "value": ""
-                }
+              "path": [
+                "notes"
               ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "notes-create",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"note baru\",\r\n    \"content\": \"content baru\",\r\n    \"status\": \"Active\",\r\n    \"category_id\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/notes",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "notes"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 15:40:42 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "278"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Note created successfully\",\n    \"data\": {\n        \"id\": 41,\n        \"user_id\": 1,\n        \"category_id\": 1,\n        \"title\": \"note baru\",\n        \"content\": \"content baru\",\n        \"status\": \"Active\",\n        \"created_at\": \"2026-06-23T22:40:42.7487081+07:00\",\n        \"updated_at\": \"2026-06-23T22:40:42.7487081+07:00\",\n        \"deleted_at\": null\n    }\n}"
+            }
+          ]
         },
         {
-          "name": "Get Note Detail",
+          "name": "notes-detail",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMjg2MjksInVzZXJfaWQiOjF9.qs-aJ8Ht6LbT76ZTW2b3cYHe4V2CKfBzPoCSV3WP0vw",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "http://localhost:8080/notes/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "8080",
-              "path": ["notes", "1"]
+              "path": [
+                "notes",
+                "1"
+              ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "notes-detail",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/notes/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "notes",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 14:33:53 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "379"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Note retrieved successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"category_id\": 1,\n        \"title\": \"Rapat Pagi Tim\",\n        \"content\": \"Membahas progress sprint mingguan. Tim backend selesaikan API authentication. Frontend siap integrate dengan endpoint baru.\",\n        \"status\": \"Active\",\n        \"created_at\": \"2026-06-23T20:42:11+07:00\",\n        \"updated_at\": \"2026-06-23T20:49:05+07:00\",\n        \"deleted_at\": null\n    }\n}"
+            }
+          ]
         },
         {
-          "name": "Update Note",
+          "name": "notes-update",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzI2MzIsInVzZXJfaWQiOjF9.xm_WCx2QIO5JAuFS1DiZnee2e2dMI9TM8GQj4MwZQbM",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Updated Title\",\n  \"content\": \"Updated content\",\n  \"status\": \"Active\",\n  \"active\": true,\n  \"archived\": false\n}"
+              "raw": "{\r\n    \"category_id\": 3,\r\n    \"title\": \"Olahraga Sore\",\r\n    \"content\": \"Jogging di GBK\",\r\n    \"status\": \"Active\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
             "url": {
               "raw": "http://localhost:8080/notes/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "8080",
-              "path": ["notes", "1"]
+              "path": [
+                "notes",
+                "1"
+              ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "notes-update",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"category_id\": 3,\r\n    \"title\": \"Olahraga Sore\",\r\n    \"content\": \"Jogging di GBK\",\r\n    \"status\": \"Active\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/notes/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "notes",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 15:37:52 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "275"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Note updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"category_id\": 3,\n        \"title\": \"Olahraga Sore\",\n        \"content\": \"Jogging di GBK\",\n        \"status\": \"Active\",\n        \"created_at\": \"2026-06-23T20:42:11+07:00\",\n        \"updated_at\": \"2026-06-23T22:37:52.5798255+07:00\",\n        \"deleted_at\": null\n    }\n}"
+            }
+          ]
         },
         {
-          "name": "Delete Note",
+          "name": "notes-delete",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzI2MzIsInVzZXJfaWQiOjF9.xm_WCx2QIO5JAuFS1DiZnee2e2dMI9TM8GQj4MwZQbM",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [],
             "url": {
               "raw": "http://localhost:8080/notes/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "8080",
-              "path": ["notes", "1"]
+              "path": [
+                "notes",
+                "1"
+              ]
             }
-          }
+          },
+          "response": [
+            {
+              "name": "notes-delete",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/notes/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "notes",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 15:46:20 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "54"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Note deleted successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "notes-search&filter",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzYxMTcsInVzZXJfaWQiOjF9.9GG-T-IinnTpk1j2PRm29dMWal22LFlc8jgrecLDUzQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/notes?search=baru&status=Archived",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "notes"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "baru",
+                  "type": "text"
+                },
+                {
+                  "key": "status",
+                  "value": "Archived",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "notes-search&filter",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/notes?search=baru&status=Archived",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "notes"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "baru",
+                      "type": "text"
+                    },
+                    {
+                      "key": "status",
+                      "value": "Archived",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 16:40:53 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "327"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Notes retrieved successfully\",\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": 41,\n                \"user_id\": 1,\n                \"category_id\": 1,\n                \"title\": \"note baru\",\n                \"content\": \"content baru\",\n                \"status\": \"Archived\",\n                \"created_at\": \"2026-06-23T22:40:43+07:00\",\n                \"updated_at\": \"2026-06-23T22:40:43+07:00\",\n                \"deleted_at\": null\n            }\n        ],\n        \"page\": 1,\n        \"page_size\": 5,\n        \"total\": 1,\n        \"total_pages\": 1\n    }\n}"
+            }
+          ]
         }
       ]
-    }
-  ],
-  "variable": [
+    },
     {
-      "key": "token",
-      "value": "",
-      "type": "string"
+      "name": "tags",
+      "item": [
+        {
+          "name": "tags-create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzQ2ODMsInVzZXJfaWQiOjF9.ykTdQcri88RdoHalHpiDaWEmgYoXZW8ciCdy-0zPQqk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Opsional\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/tags",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "tags"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "tags-create",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Opsional\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/tags",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "tags"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 16:14:34 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "216"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Tag created successfully\",\n    \"data\": {\n        \"id\": 41,\n        \"user_id\": 1,\n        \"name\": \"Opsional\",\n        \"created_at\": \"2026-06-23T23:14:34.7652701+07:00\",\n        \"updated_at\": \"2026-06-23T23:14:34.7652701+07:00\",\n        \"deleted_at\": null\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "tags-all",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzQ2ODMsInVzZXJfaWQiOjF9.ykTdQcri88RdoHalHpiDaWEmgYoXZW8ciCdy-0zPQqk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/tags",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "tags"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "tags-all",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/tags",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "tags"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 16:16:21 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1622"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Tags retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": 4,\n            \"user_id\": 1,\n            \"name\": \"Blocked\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 8,\n            \"user_id\": 1,\n            \"name\": \"Bug Fix\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 2,\n            \"user_id\": 1,\n            \"name\": \"Completed\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 10,\n            \"user_id\": 1,\n            \"name\": \"Documentation\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 9,\n            \"user_id\": 1,\n            \"name\": \"Feature Request\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 6,\n            \"user_id\": 1,\n            \"name\": \"High Priority\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 3,\n            \"user_id\": 1,\n            \"name\": \"In Progress\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 7,\n            \"user_id\": 1,\n            \"name\": \"Low Priority\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 41,\n            \"user_id\": 1,\n            \"name\": \"Opsional\",\n            \"created_at\": \"2026-06-23T23:14:35+07:00\",\n            \"updated_at\": \"2026-06-23T23:14:35+07:00\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 5,\n            \"user_id\": 1,\n            \"name\": \"Review Needed\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"name\": \"Urgent\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\",\n            \"updated_at\": \"2026-06-23T20:42:11+07:00\",\n            \"deleted_at\": null\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "tags-update",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzQ2ODMsInVzZXJfaWQiOjF9.ykTdQcri88RdoHalHpiDaWEmgYoXZW8ciCdy-0zPQqk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Test\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/tags/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "tags",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "tags-update",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Test\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/tags/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "tags",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 16:25:08 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "203"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Tag updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"name\": \"Test\",\n        \"created_at\": \"2026-06-23T20:42:11+07:00\",\n        \"updated_at\": \"2026-06-23T23:25:08.4487811+07:00\",\n        \"deleted_at\": null\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "tags-delete",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzYxMTcsInVzZXJfaWQiOjF9.9GG-T-IinnTpk1j2PRm29dMWal22LFlc8jgrecLDUzQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/tags/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "tags",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "tags-delete",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/tags/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "tags",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 16:43:59 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "53"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Tag deleted successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "tags-to-note",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzg3MDgsInVzZXJfaWQiOjF9.Iy44FtuqNpixL_-IT6geSJxG_u7YEpXty1mNCQNEmNM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/tags/add?note_id=2&tag_id=2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "tags",
+                "add"
+              ],
+              "query": [
+                {
+                  "key": "note_id",
+                  "value": "2",
+                  "type": "text"
+                },
+                {
+                  "key": "tag_id",
+                  "value": "2",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "tags-to-note",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/tags/add?note_id=2&tag_id=2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "tags",
+                    "add"
+                  ],
+                  "query": [
+                    {
+                      "key": "note_id",
+                      "value": "2"
+                    },
+                    {
+                      "key": "tag_id",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 17:18:47 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "59"
+                }
+              ],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Tag added to note successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "tags-delete-from-note",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIyMzg3MDgsInVzZXJfaWQiOjF9.Iy44FtuqNpixL_-IT6geSJxG_u7YEpXty1mNCQNEmNM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/tags/remove?note_id=2&tag_id=2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "tags",
+                "remove"
+              ],
+              "query": [
+                {
+                  "key": "note_id",
+                  "value": "2"
+                },
+                {
+                  "key": "tag_id",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "tags-delete-from-note",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/tags/remove?note_id=2&tag_id=2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "tags",
+                    "remove"
+                  ],
+                  "query": [
+                    {
+                      "key": "note_id",
+                      "value": "2"
+                    },
+                    {
+                      "key": "tag_id",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 23 Jun 2026 17:24:53 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "63"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Tag removed from note successfully\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "favorite",
+      "item": [
+        {
+          "name": "note-favorite-add",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIzNTczNzIsInVzZXJfaWQiOjF9.qbYiPSZxn49alamzjUJva1fW4og9xnfmY2C7iok2Hno",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/notes/43/favorite",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "notes",
+                "43",
+                "favorite"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "note-favorite-add",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/notes/8/favorite",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "notes",
+                    "8",
+                    "favorite"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 24 Jun 2026 03:23:25 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "65"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Note added to favorites successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "note-favorite-remove",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIzNTczNzIsInVzZXJfaWQiOjF9.qbYiPSZxn49alamzjUJva1fW4og9xnfmY2C7iok2Hno",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/notes/8/favorite",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "notes",
+                "8",
+                "favorite"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "note-favorite-remove",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/notes/8/favorite",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "notes",
+                    "8",
+                    "favorite"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 24 Jun 2026 03:22:14 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "69"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Note removed from favorites successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "note-favorite-all",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODIzNTczNzIsInVzZXJfaWQiOjF9.qbYiPSZxn49alamzjUJva1fW4og9xnfmY2C7iok2Hno",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/notes/favorites",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "notes",
+                "favorites"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "note-favorite-all",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/notes/favorites",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "notes",
+                    "favorites"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 24 Jun 2026 03:42:01 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1495"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Favorite notes retrieved successfully\",\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": 43,\n                \"user_id\": 1,\n                \"category_id\": 3,\n                \"title\": \"note baru 2\",\n                \"content\": \"content baru 2\",\n                \"status\": \"Active\",\n                \"created_at\": \"2026-06-24T10:27:08+07:00\",\n                \"updated_at\": \"2026-06-24T10:41:57+07:00\",\n                \"deleted_at\": null\n            },\n            {\n                \"id\": 41,\n                \"user_id\": 1,\n                \"category_id\": 18,\n                \"title\": \"note baru\",\n                \"content\": \"content baru\",\n                \"status\": \"Archived\",\n                \"created_at\": \"2026-06-23T22:40:43+07:00\",\n                \"updated_at\": \"2026-06-24T10:41:57+07:00\",\n                \"deleted_at\": null\n            },\n            {\n                \"id\": 2,\n                \"user_id\": 1,\n                \"category_id\": 2,\n                \"title\": \"Review Code\",\n                \"content\": \"Review pull request dari 3 developer. Menemukan issue pada error handling. Suggest refactor code untuk readability lebih baik.\",\n                \"status\": \"Active\",\n                \"created_at\": \"2026-06-23T19:42:11+07:00\",\n                \"updated_at\": \"2026-06-24T10:41:57+07:00\",\n                \"deleted_at\": null\n            },\n            {\n                \"id\": 4,\n                \"user_id\": 1,\n                \"category_id\": 4,\n                \"title\": \"Fixing Bug Login\",\n                \"content\": \"Temukan bug di login handler. User tidak bisa login dengan password benar. Fixed issue pada password verification logic.\",\n                \"status\": \"Active\",\n                \"created_at\": \"2026-06-23T17:42:11+07:00\",\n                \"updated_at\": \"2026-06-24T10:41:57+07:00\",\n                \"deleted_at\": null\n            },\n            {\n                \"id\": 5,\n                \"user_id\": 1,\n                \"category_id\": 17,\n                \"title\": \"Dokumentasi API\",\n                \"content\": \"Tulis dokumentasi lengkap untuk API endpoints. Include request/response examples, error codes, dan authentication requirements.\",\n                \"status\": \"Active\",\n                \"created_at\": \"2026-06-23T16:42:11+07:00\",\n                \"updated_at\": \"2026-06-24T10:41:57+07:00\",\n                \"deleted_at\": null\n            }\n        ],\n        \"page\": 1,\n        \"page_size\": 5,\n        \"total\": 8,\n        \"total_pages\": 2\n    }\n}"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
