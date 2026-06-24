@@ -154,6 +154,12 @@ func DeleteTag(db *gorm.DB) gin.HandlerFunc {
 	}
 }
 
+// Struct untuk menangkap Query Parameter (?note_id=X&tag_id=Y)
+type TagQuery struct {
+	NoteID uint `form:"note_id" binding:"required"`
+	TagID  uint `form:"tag_id" binding:"required"`
+}
+
 // Menambahkan tag ke note
 func AddTagToNote(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -163,23 +169,16 @@ func AddTagToNote(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
-		noteID := c.Param("noteId")
-		nID, err := strconv.ParseUint(noteID, 10, 32)
-		if err != nil {
-			utils.ErrorResponse(c, 400, "Invalid note ID")
-			return
-		}
-
-		tagID := c.Param("tagId")
-		tID, err := strconv.ParseUint(tagID, 10, 32)
-		if err != nil {
-			utils.ErrorResponse(c, 400, "Invalid tag ID")
+		// Menangkap parameter dari URL Query (?note_id=...&tag_id=...)
+		var query TagQuery
+		if err := c.ShouldBindQuery(&query); err != nil {
+			utils.ErrorResponse(c, 400, "Query parameter note_id dan tag_id wajib diisi dengan angka")
 			return
 		}
 
 		// Verify note belongs to user
 		var note models.Note
-		if err := db.Where("id = ? AND user_id = ? AND deleted_at IS NULL", uint(nID), userID.(uint)).
+		if err := db.Where("id = ? AND user_id = ? AND deleted_at IS NULL", query.NoteID, userID.(uint)).
 			First(&note).Error; err != nil {
 			utils.ErrorResponse(c, 404, "Note not found")
 			return
@@ -187,7 +186,7 @@ func AddTagToNote(db *gorm.DB) gin.HandlerFunc {
 
 		// Verify tag belongs to user
 		var tag models.Tag
-		if err := db.Where("id = ? AND user_id = ? AND deleted_at IS NULL", uint(tID), userID.(uint)).
+		if err := db.Where("id = ? AND user_id = ? AND deleted_at IS NULL", query.TagID, userID.(uint)).
 			First(&tag).Error; err != nil {
 			utils.ErrorResponse(c, 404, "Tag not found")
 			return
@@ -195,19 +194,21 @@ func AddTagToNote(db *gorm.DB) gin.HandlerFunc {
 
 		// Check if tag already added
 		var existingNoteTag models.NoteTag
-		if db.Where("note_id = ? AND tag_id = ?", uint(nID), uint(tID)).First(&existingNoteTag).RecordNotFound() {
+		err := db.Where("note_id = ? AND tag_id = ?", query.NoteID, query.TagID).First(&existingNoteTag).Error
+		
+		if err != nil { // Jika data belum ada (error record not found), lakukan insert
 			noteTag := models.NoteTag{
-				NoteID: uint(nID),
-				TagID:  uint(tID),
+				NoteID: query.NoteID,
+				TagID:  query.TagID,
 			}
 
-			if err := db.Create(&noteTag).Error; err != nil {
+			if errCreate := db.Create(&noteTag).Error; errCreate != nil {
 				utils.ErrorResponse(c, 500, "Failed to add tag to note")
 				return
 			}
 
 			// Log activity
-			utils.LogActivity(db, userID.(uint), "ADD_TAG", "Note", uint(nID), gin.H{"tag_id": tID})
+			utils.LogActivity(db, userID.(uint), "ADD_TAG", "Note", query.NoteID, gin.H{"tag_id": query.TagID})
 		}
 
 		utils.SuccessResponse(c, 200, "Tag added to note successfully", nil)
@@ -223,35 +224,29 @@ func RemoveTagFromNote(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
-		noteID := c.Param("noteId")
-		nID, err := strconv.ParseUint(noteID, 10, 32)
-		if err != nil {
-			utils.ErrorResponse(c, 400, "Invalid note ID")
-			return
-		}
-
-		tagID := c.Param("tagId")
-		tID, err := strconv.ParseUint(tagID, 10, 32)
-		if err != nil {
-			utils.ErrorResponse(c, 400, "Invalid tag ID")
+		// Menangkap parameter dari URL Query
+		var query TagQuery
+		if err := c.ShouldBindQuery(&query); err != nil {
+			utils.ErrorResponse(c, 400, "Query parameter note_id dan tag_id wajib diisi dengan angka")
 			return
 		}
 
 		// Verify note belongs to user
 		var note models.Note
-		if err := db.Where("id = ? AND user_id = ? AND deleted_at IS NULL", uint(nID), userID.(uint)).
+		if err := db.Where("id = ? AND user_id = ? AND deleted_at IS NULL", query.NoteID, userID.(uint)).
 			First(&note).Error; err != nil {
 			utils.ErrorResponse(c, 404, "Note not found")
 			return
 		}
 
-		if err := db.Where("note_id = ? AND tag_id = ?", uint(nID), uint(tID)).Delete(&models.NoteTag{}).Error; err != nil {
+		// Menghapus relasi tag pada note
+		if err := db.Where("note_id = ? AND tag_id = ?", query.NoteID, query.TagID).Delete(&models.NoteTag{}).Error; err != nil {
 			utils.ErrorResponse(c, 500, "Failed to remove tag from note")
 			return
 		}
 
 		// Log activity
-		utils.LogActivity(db, userID.(uint), "REMOVE_TAG", "Note", uint(nID), gin.H{"tag_id": tID})
+		utils.LogActivity(db, userID.(uint), "REMOVE_TAG", "Note", query.NoteID, gin.H{"tag_id": query.TagID})
 
 		utils.SuccessResponse(c, 200, "Tag removed from note successfully", nil)
 	}
