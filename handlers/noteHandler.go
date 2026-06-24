@@ -77,6 +77,7 @@ type UpdateNoteRequest struct {
 	Title   string `json:"title"`
 	Content string `json:"content"`
 	Status  string `json:"status"`
+	CategoryID *uint  `json:"category_id"`
 }
 
 // Mengubah catatan yang sudah ada
@@ -108,6 +109,20 @@ func UpdateNote(db *gorm.DB) gin.HandlerFunc {
 		}
 
 		// Update field jika disediakan
+		if input.CategoryID != nil {
+			// Jika user mengirimkan angka > 0 (ingin mengubah ke kategori tertentu)
+			if *input.CategoryID > 0 {
+				var category models.Category
+				// Cek apakah kategori valid dan milik user tersebut
+				if err := db.Where("id = ? AND user_id = ?", *input.CategoryID, userID.(uint)).First(&category).Error; err != nil {
+					utils.ErrorResponse(c, 404, "Category not found or does not belong to you")
+					return
+				}
+			}
+			
+			// Set nilai CategoryID yang baru (bisa berupa angka ID, atau pointer kosong/null jika user ingin menghapus kategori)
+			note.CategoryID = input.CategoryID
+		}
 		if input.Title != "" {
 			note.Title = input.Title
 		}
