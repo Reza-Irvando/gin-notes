@@ -1859,6 +1859,109 @@
           ]
         }
       ]
+    },
+    {
+      "name": "log",
+      "item": [
+        {
+          "name": "activities",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "activities",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:8080/activities",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "activities"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 24 Jun 2026 06:14:06 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "983"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Activity logs retrieved successfully\",\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": 113,\n                \"user_id\": 1,\n                \"action\": \"ADD_FAVORITE\",\n                \"entity\": \"Note\",\n                \"entity_id\": 43,\n                \"details\": \"{}\",\n                \"ip_address\": \"\",\n                \"created_at\": \"2026-06-24T10:28:33+07:00\"\n            },\n            {\n                \"id\": 112,\n                \"user_id\": 1,\n                \"action\": \"CREATE\",\n                \"entity\": \"Note\",\n                \"entity_id\": 43,\n                \"details\": \"{\\\"title\\\":\\\"note baru 2\\\",\\\"content\\\":\\\"content baru 2\\\",\\\"status\\\":\\\"Active\\\",\\\"category_id\\\":3}\",\n                \"ip_address\": \"\",\n                \"created_at\": \"2026-06-24T10:27:08+07:00\"\n            },\n            {\n                \"id\": 111,\n                \"user_id\": 1,\n                \"action\": \"ADD_FAVORITE\",\n                \"entity\": \"Note\",\n                \"entity_id\": 8,\n                \"details\": \"{}\",\n                \"ip_address\": \"\",\n                \"created_at\": \"2026-06-24T10:23:25+07:00\"\n            },\n            {\n                \"id\": 110,\n                \"user_id\": 1,\n                \"action\": \"REMOVE_FAVORITE\",\n                \"entity\": \"Note\",\n                \"entity_id\": 8,\n                \"details\": \"{}\",\n                \"ip_address\": \"\",\n                \"created_at\": \"2026-06-24T10:22:15+07:00\"\n            },\n            {\n                \"id\": 109,\n                \"user_id\": 1,\n                \"action\": \"REMOVE_TAG\",\n                \"entity\": \"Note\",\n                \"entity_id\": 2,\n                \"details\": \"{\\\"tag_id\\\":2}\",\n                \"ip_address\": \"\",\n                \"created_at\": \"2026-06-24T00:24:53+07:00\"\n            }\n        ],\n        \"page\": 1,\n        \"page_size\": 5,\n        \"total\": 41,\n        \"total_pages\": 9\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "get-entity",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "get-entity",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/activities/Note/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "activities",
+                    "Note",
+                    "2"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 24 Jun 2026 06:16:39 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "399"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Activity logs retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": 109,\n            \"user_id\": 1,\n            \"action\": \"REMOVE_TAG\",\n            \"entity\": \"Note\",\n            \"entity_id\": 2,\n            \"details\": \"{\\\"tag_id\\\":2}\",\n            \"ip_address\": \"\",\n            \"created_at\": \"2026-06-24T00:24:53+07:00\"\n        },\n        {\n            \"id\": 2,\n            \"user_id\": 1,\n            \"action\": \"CREATE\",\n            \"entity\": \"Note\",\n            \"entity_id\": 2,\n            \"details\": \"{\\\"title\\\":\\\"Review Code\\\"}\",\n            \"ip_address\": \"\",\n            \"created_at\": \"2026-06-23T20:42:11+07:00\"\n        }\n    ]\n}"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -110,7 +110,7 @@ Server akan berjalan di `http://localhost:8080`
 
 1. Buka Postman
 2. Import collection: `postman/collections/Notes_Management_System.postman_collection.json`
-3. Atau import dari link url [Postman Notes Collection](https://red-firefly-423695.postman.co/workspace/gin-notes~a96d39dc-ee1d-4baf-a1d2-38c733eab583/collection/56061881-282b8046-983e-46ca-8862-e98f3d5c1afb?action=share&creator=56061881&active-environment=56061881-bffca621-673e-4441-af86-cbb6e8737730)
+3. Atau import dari link url [Postman Notes Collection](https://red-firefly-423695.postman.co/workspace/gin-notes~a96d39dc-ee1d-4baf-a1d2-38c733eab583/collection/56061881-282b8046-983e-46ca-8862-e98f3d5c1afb?action=share&source=copy-link&creator=56061881)
 
 ### Workflow Testing
 
