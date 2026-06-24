@@ -85,7 +85,7 @@ func RemoveFromFavorite(db *gorm.DB) gin.HandlerFunc {
 			utils.ErrorResponse(c, 500, "Failed to remove from favorite")
 			return
 		}
-		
+
 		// Log activity
 		utils.LogActivity(db, userID.(uint), "REMOVE_FAVORITE", "Note", uint(id), gin.H{})
 
@@ -135,31 +135,6 @@ func GetFavoriteNotes(db *gorm.DB) gin.HandlerFunc {
 			"page":        page,
 			"page_size":   DefaultPageSize,
 			"total_pages": (total + int64(DefaultPageSize) - 1) / int64(DefaultPageSize),
-		})
-	}
-}
-
-// Check apakah note adalah favorit
-func IsFavorite(db *gorm.DB) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		userID, exists := c.Get("user_id")
-		if !exists {
-			utils.ErrorResponse(c, 401, "Unauthorized")
-			return
-		}
-
-		noteID := c.Param("id")
-		id, err := strconv.ParseUint(noteID, 10, 32)
-		if err != nil {
-			utils.ErrorResponse(c, 400, "Invalid note ID")
-			return
-		}
-
-		var favorite models.Favorite
-		isFavorite := !db.Where("note_id = ? AND user_id = ?", uint(id), userID.(uint)).First(&favorite).RecordNotFound()
-
-		utils.SuccessResponse(c, 200, "Check favorite status successfully", gin.H{
-			"is_favorite": isFavorite,
 		})
 	}
 }
