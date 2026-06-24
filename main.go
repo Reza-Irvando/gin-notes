@@ -37,16 +37,17 @@ func main(){
 	notes := r.Group("/notes")
 	notes.Use(middlewares.AuthMiddleware())
 	{
-		notes.POST("add", handlers.CreateNote(db))
+		notes.POST("", handlers.CreateNote(db))
 		notes.GET("", handlers.GetAllNotes(db))
 		notes.GET("/:id", handlers.GetNoteDetail(db))
-		notes.PUT("/update/:id", handlers.UpdateNote(db))
+		notes.PUT("/:id", handlers.UpdateNote(db))
 		notes.DELETE("/:id", handlers.DeleteNote(db))
 
 		// Favorite routes
 		notes.POST("/:id/favorite", handlers.AddToFavorite(db))
+		notes.GET("/favorites", handlers.GetFavoriteNotes(db))
 		notes.DELETE("/:id/favorite", handlers.RemoveFromFavorite(db))
-		notes.GET("/favorite/check/:id", handlers.IsFavorite(db))
+		// notes.GET("/favorite/check/:id", handlers.IsFavorite(db))
 	}
 
 	// Protected routes - Categories
@@ -69,15 +70,8 @@ func main(){
 		tags.DELETE("/:id", handlers.DeleteTag(db))
 
 		// Note-Tag relationship
-		tags.POST("/add/:noteId/:tagId", handlers.AddTagToNote(db))
-		tags.DELETE("/remove/:noteId/:tagId", handlers.RemoveTagFromNote(db))
-	}
-
-	// Protected routes - Favorites
-	favorites := r.Group("/favorites")
-	favorites.Use(middlewares.AuthMiddleware())
-	{
-		favorites.GET("", handlers.GetFavoriteNotes(db))
+		tags.POST("/add", handlers.AddTagToNote(db))
+		tags.DELETE("/remove", handlers.RemoveTagFromNote(db))
 	}
 
 	// Protected routes - Activity Log
